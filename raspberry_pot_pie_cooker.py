@@ -2,7 +2,7 @@ import os, time, sys, thread
 import httplib, urllib, signal
 import RPi.GPIO as GPIO
 import lirc
-
+     
 #Documentation: config: stop lirc daemon, recognize your remote control, this gives you the codes. Record the button pushes and this will create a config file, which you copy to /etc/lirc/lircd.conf (or without the d).
 #Then create a .lircrc file, which maps the buttons to the functions of the socket, that python can read
 
