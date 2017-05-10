@@ -3,8 +3,11 @@ import httplib, urllib, signal
 import RPi.GPIO as GPIO
 import lirc
      
-#Documentation: config: stop lirc daemon, recognize your remote control, this gives you the codes. Record the button pushes and this will create a config file, which you copy to /etc/lirc/lircd.conf (or without the d).
-#Then create a .lircrc file, which maps the buttons to the functions of the socket, that python can read
+#Documentation: config: stop lirc daemon, recognize your remote control, this gives you the 
+#codes. Record the button pushes and this will create a config file, which you copy to 
+#/etc/lirc/lircd.conf (or without the d).
+#Then create a .lircrc file, which maps the buttons to the functions of the socket, 
+#that python can read
 
 os.system("modprobe w1-gpio")
 os.system("modprobe w1-therm")
@@ -114,7 +117,7 @@ def remote_input_thread(thread_name,delaybox):
 			
 
     print "thread end"                                                                                                                                                                                                                                                                                                                                                 
-#main look, runs forever
+#main loop, runs forever
 thread.start_new_thread(remote_input_thread,("gurkithread",5,))
 while True == True:
 	print "main loop starting"
