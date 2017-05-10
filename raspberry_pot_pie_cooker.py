@@ -1,7 +1,6 @@
-import os, time, sys, thread
+import os, time, sys
 import httplib, urllib, signal
 import RPi.GPIO as GPIO
-import lirc
      
 #Documentation: config: stop lirc daemon, recognize your remote control, this gives you the 
 #codes. Record the button pushes and this will create a config file, which you copy to 
@@ -23,7 +22,6 @@ set_temp=80
 set_time=60
 system_on=False
 fire=0
-thread_status_on = True
 
 
 #GPIO.cleanup()
@@ -84,41 +82,9 @@ def post_thingspeak(temp,fire):
 		print  "connection failed!"                                                                                                                                      
 
 
-def remote_input_thread(thread_name,delaybox):
-	print "thread start"
-	global set_temp
-	global set_time
-	global system_on
-	while thread_status_on == True:
-	print "before init"
-		sockid = lirc.init("myprogram",".lircrc")
-        print "before nextcode"
-		code_list = lirc.nextcode()
-        print "after nextcode"
-       		if code_list != []:
-                    print "inside if start"
-                	code = code_list[0]
-                	print code
-                	if code == "KEY_VOLUMEUP":
-                     	   	set_temp = set_temp + 10
-                	if code == "KEY_VOLUMEDOWN":
-                        	set_temp = set_temp - 10
-                	if code == "KEY_PLAY":
-                        	#toggle system
-                        	if system_on == True:
-                                	system_on = False
-                        	else:
-                                	system_on = True
-                	if code == "KEY_CHANNELUP":
-                        	print "temp up!"
-                        	set_time = set_time + 10
-                	if code == "KEY_CHANNELDOWN":
-				set_time = set_time - 10
-			
-
-    print "thread end"                                                                                                                                                                                                                                                                                                                                                 
+                                                                                                                                                                                                                                                                                                                                    
 #main loop, runs forever
-thread.start_new_thread(remote_input_thread,("gurkithread",5,))
+
 while True == True:
 	print "main loop starting"
 	time_start = int(time.time())
